@@ -1,0 +1,6 @@
+{
+  "name": "NexWall X Ultimate",
+  "description": "4D Live & 4K Animated Wallpapers with Live Wallpaper Service, Wallpaper Studio, customized AMOLED effects, and auto-change packs.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
