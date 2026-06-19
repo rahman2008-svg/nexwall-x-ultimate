@@ -1,17 +1,14 @@
 workflows:
   nexwall_x_ultimate:
-    name: NexWall X Ultimate CI/CD
+    name: NexWall X Ultimate (Debug Build)
     max_build_duration: 120
 
     environment:
-      android_signing:
-        - keystore_reference
+      java: 17
 
       vars:
         PACKAGE_NAME: "com.aistudio.nexwallx.ykpwzt"
         GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx4g -Dkotlin.daemon.jvm.options=-Xmx2g"
-
-      java: 17
 
     cache:
       cache_paths:
@@ -19,7 +16,7 @@ workflows:
         - ~/.gradle/wrapper
 
     scripts:
-      - name: Set up Gradle permissions
+      - name: Make gradlew executable
         script: |
           chmod +x ./gradlew
 
@@ -27,21 +24,12 @@ workflows:
         script: |
           ./gradlew clean
 
-      - name: Decode secrets (if using env file)
-        script: |
-          echo "$ENV_FILE" > .env || true
-
       - name: Build Debug APK
         script: |
           ./gradlew assembleDebug --stacktrace
 
-      - name: Build Release APK
-        script: |
-          ./gradlew assembleRelease --stacktrace
-
     artifacts:
       - app/build/outputs/**/*.apk
-      - app/build/outputs/**/*.aab
       - build/reports/**
 
     publishing:
